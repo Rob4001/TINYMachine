@@ -79,7 +79,7 @@ public abstract class CPU {
 			break;
 		case 4:
 			ac = memory[memory[ip+1]];
-			if (ac==0)fr.zf = true; else fr.zf = false;
+			fr.zf = ac==0; 
 			ip += 1;
 			break;
 		case 5:
@@ -88,7 +88,7 @@ public abstract class CPU {
 			break;
 		case 6:
 			ac = get();
-			if (ac==0)fr.zf = true; else fr.zf = false;
+			fr.zf = ac==0; 
 			break;
 		case 7:
 			put(Integer.toHexString(ac));
@@ -100,7 +100,7 @@ public abstract class CPU {
 				ac = ac - 16;
 				fr.cf = true;
 			}
-			if (ac==0)fr.zf = true; else fr.zf = false;
+			fr.zf = ac==0; 
 			break;
 		case 9:
 			boolean tmp = ac%2 !=0;
@@ -108,7 +108,7 @@ public abstract class CPU {
 			ac = ac /2;
 			if(fr.cf) ac += 8;
 			fr.cf = tmp;
-			if (ac==0)fr.zf = true; else fr.zf = false;
+			fr.zf = ac==0; 
 			break;
 		case 10: 
 			ac = ac + memory[memory[ip+1]];
@@ -116,8 +116,11 @@ public abstract class CPU {
 			if (ac >= 16){
 				ac = ac - 16;
 				fr.cf = true;
+			}else{
+				fr.cf = false;
 			}
-			if (ac==0)fr.zf = true; else fr.zf = false;
+			fr.zf = ac==0; 
+			
 			ip +=1;
 			break;
 		case 11:
@@ -137,11 +140,12 @@ public abstract class CPU {
 			break;
 		case 15:
 			ac = 15 - ac;
-			if (ac==0)fr.zf = true; else fr.zf = false;
+			fr.zf = ac==0; 
 			break;
 		}
 //		System.out.println("Executed");
 		ip += 1;
+		if (ip>15) ip -= 16;
 	}
 	
 	public void printCurrentConfig(){
