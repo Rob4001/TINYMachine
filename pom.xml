@@ -4,6 +4,7 @@
   <artifactId>TINY</artifactId>
   <version>0.0.1</version>
   <build>
+  <finalName>TINY</finalName>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
@@ -14,6 +15,7 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+      
     </plugins>
   </build>
 </project>
